@@ -220,7 +220,7 @@ def run(weights=ROOT / 'runs/train/exp13/weights/best.pt',  # model.pt path(s)
                             fps, w, h = 30, im0.shape[1], im0.shape[0]
                         save_path = str(Path(save_path).with_suffix('.mp4'))  # force *.mp4 suffix on results videos
                         vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
-                    vid_writer[i].write(save_im)  ######replace the original im0 to save_im
+                    vid_writer[i].write(save_im)          #replace the original im0 to save_im
 
         # Print time (inference-only)
         LOGGER.info(f'{s}Done. ({t3 - t2:.3f}s)')
