@@ -29,7 +29,7 @@ def makesure(pts):
         is_Rotate = False
     return is_Rotate
 
-def distance(zer, sec, thir):   #计算两点间的距离
+def distance(zer, sec, thir):   #计算两点间的距离, zer->zero sec->second thir->third
     right = np.sqrt((sec[1]-thir[1])**2+(sec[0]-thir[0])**2)
     left = np.sqrt((zer[1]-thir[1])**2+(thir[0]-zer[0])**2)
     return right, left
