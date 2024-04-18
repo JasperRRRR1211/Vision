@@ -104,7 +104,7 @@ def run(image):
     img_cpy = image.copy()
     cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
     if not cnts:  # 如果conts为空
-        print("No contours found.")
+        #print("No contours found.")
         return  # 结束run()函数，返回到调用点
     cnts = sorted(cnts, key=cv2.contourArea, reverse=True)[:5]
     TarCnt = cnts[0]
@@ -138,7 +138,7 @@ def run(image):
         else:
             angle = angle
     else:
-        print('wrong pic')
+        #print('wrong pic')
         return
 
     #旋转图片
@@ -155,7 +155,7 @@ def run(image):
     ref = cv2.medianBlur(ref, 5)
     conts = cv2.findContours(ref.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
     if not conts:
-        print("No contours found.")
+        #print("No contours found.")
         return
     conts = sorted(conts, key = cv2.contourArea, reverse = True)[:5]
     pentagon = conts[0]
@@ -185,17 +185,21 @@ def run(image):
         ptg_box = cv2.boxPoints(ptg_rect)
         ptg_box = np.int0(ptg_box)
         width, height = ptg_rect[1]
-        print(width, height)
+        #print(width, height)
         width = np.int0(width)
         height = np.int0(height)
+	    
         left_vertex = ptg_box[0]    #最左侧的坐标值拿出来
+	right_vertex = ptg_box[2]   #最右侧的坐标值
+        center = [(left_vertex[0]+right_vertex[0])/2, (left_vertex[1]+right_vertex[1])/2]		#计算中心点坐标!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
         x = left_vertex[0]
         y = left_vertex[1]
     croped_pentagon = orig[y:y+width, x:x+height]   #截取五边形标靶
     orig_PTG = croped_pentagon
     PTG_cpy = croped_pentagon.copy()
     if croped_pentagon.size == 0:
-        print('wrong picture')
+        #print('wrong picture')
         return
     croped_pentagon = cv2.cvtColor(croped_pentagon, cv2.COLOR_BGR2GRAY)
     croped_pentagon = cv2.medianBlur(croped_pentagon, 5)
@@ -214,10 +218,11 @@ def run(image):
     if square is not None:
         number = four_point_transform(orig_PTG, square.reshape(4, 2))
         number = cv2.resize(number, (60, 60))
+	print(center)			#打印中心点坐标
         #cv_show(PTG_cpy)
         return number
     else:
-        print("No suitable target found.")
+        #print("No suitable target found.")
         return None
 
 if __name__ == '__main__':
