@@ -191,8 +191,8 @@ def run(weights=ROOT / 'runs/train/exp13/weights/best.pt',  # model.pt path(s)
                             pics += 1
                             #else:
                                 #print('None')
-                        else:
-                            print("No image detected")
+                        #else:
+                            #print("No image detected")
 
 
 
